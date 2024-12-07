@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess The Number</title>
+    <style>
+        /* General Styles */
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            color: #5c67f2;
+            margin-top: 20px;
+        }
+        input {
+            padding: 10px;
+            width: 200px;
+            font-size: 16px;
+            border: 2px solid #5c67f2;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #5c67f2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #4049c3;
+        }
+        #result {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        #score {
+            font-size: 18px;
+            color: #5c67f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        Guess The Number
+    </h1>
+    <input id="guessnumber" type="number" placeholder="Enter a number (1-10)">
+    <button onclick="check()">
+        Check
+    </button>
+    <p id="result">
+        You are Right/Wrong
+    </p>
+    <p id="score">
+        Score: 10
+    </p>
+    <script>
+        var guessnumber = document.getElementById("guessnumber");
+        var result = document.getElementById("result");
+        var randomNumber = Math.floor(Math.random() * 10) + 1;
+        var scoreElement = document.getElementById("score");
+        var totalscore = 10;
+
+        function check() {
+            var enterednumber = parseInt(guessnumber.value); // Convert input to a number
+            if (randomNumber === enterednumber) {
+                console.log("Right");
+                result.textContent = "Right!";
+                alert("You Won...");
+            } else {
+                totalscore -= 1; // Decrease the score
+                scoreElement.textContent = "Score: " + totalscore; // Update score in UI
+                result.textContent = "Wrong!";
+
+                if (totalscore <= 0) {
+                    alert("Game Over! The correct number was " + randomNumber);
+                    location.reload(); // Restart the game
+                }
+            }
+        }
+    </script>
+</body>
+</html>
